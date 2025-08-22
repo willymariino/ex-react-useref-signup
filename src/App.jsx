@@ -13,7 +13,7 @@ function App() {
 
   })
 
-  const [error, setError] = useState("")
+  const [error, setError] = useState({})
 
 
   // gestione input
@@ -51,7 +51,7 @@ function App() {
 
       let message = ""
 
-      if ((type === "text" || type === "textarea") && value.trim().length < 3) {
+      if ((type === "text" || type === "textarea" || type === "password") && value.trim().length < 3) {
         message = "almeno 3 caratteri richiesti"
       }
       else if (type === "number" && value <= 0) {
