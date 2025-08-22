@@ -46,6 +46,20 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
+    // controllo che tutti i campi abbiano valori validi
+    if (
+      !data.name.trim() ||
+      !data.username.trim() ||
+      !data.password.trim() ||
+      !data.Specialization ||
+      data.experienceYears <= 0 ||
+      !data.description.trim()
+    ) {
+      alert("⚠️ Compila tutti i campi prima di inviare!");
+      return;
+    }
+
     console.log(
       "nome:", data.name,
       "username:", data.username,
