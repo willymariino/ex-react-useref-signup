@@ -13,6 +13,8 @@ function App() {
 
   })
 
+  const [error, setError] = useState("")
+
 
   // gestione input
   const handleChange = (e) => {
@@ -39,6 +41,15 @@ function App() {
     Nell’oggetto, metti una chiave che si chiama come l’attributo name dell’input modificato, 
     e assegna a quella chiave il valore scritto dall’utente."
     */
+
+    // validazione live
+
+    if (value.lenght < 3) {
+      setError("il nome deve avere almeno 3 caratteri")
+    }
+    else {
+      setError("")
+    }
 
   }
 
@@ -88,6 +99,8 @@ function App() {
           />
         </section>
 
+        {error && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
+
         <section>
           <label htmlFor="userName">userName utente</label>
           <input type="text" id='userName'
@@ -98,6 +111,8 @@ function App() {
             placeholder='inserisci il tuo username'
           />
         </section>
+
+        {error && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
 
         <section>
           <label htmlFor="password"> password utente</label>
@@ -110,6 +125,7 @@ function App() {
           />
         </section>
 
+        {error && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
 
         <section>
           <label htmlFor="specialization">specializzazione utente </label>
@@ -120,6 +136,8 @@ function App() {
             <option value="Back-end">Back-end</option>
           </select>
         </section>
+
+        {error && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
 
         <section>
           <label htmlFor="experieYears">anni di esperienza</label>
@@ -133,6 +151,8 @@ function App() {
           />
         </section>
 
+        {error && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
+
         <section>
           <label htmlFor="description">descrizione personale</label>
           <textarea id='description'
@@ -145,6 +165,8 @@ function App() {
           </textarea>
 
         </section>
+
+        {error && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
 
         <button type='submit'>
           invia
