@@ -56,7 +56,7 @@ function App() {
     name: "",
     username: "",
     password: "",
-    // Specialization: "", li commento per gestirli 
+    // Specialization: "", li commento per gestirli tramite useRef
     //  experienceYears: 0,
     //   description: ""
 
@@ -216,10 +216,10 @@ function App() {
         <section>
           <label htmlFor="specialization">specializzazione utente </label>
           <select
-            // value={data.Specialization}
+            // value={data.Specialization} passando da un input controllato tramite state, ad uno non controllato con useRef, non mi servono più
             // onChange={handleChange}
-            id='specialization'
             //  name='Specialization'
+            id='specialization'
             ref={SpecializationRef}
           >
             <option value=""> scegli la tua specializzazione</option>
@@ -238,7 +238,7 @@ function App() {
             minLength={1}
             ref={ExperienceRef}
             //  value={data.experienceYears}
-            name='experienceYears'
+            //  name='experienceYears'
             //  onChange={handleChange}
             placeholder='inserisci i tuoi anni di esperienza'
           />
@@ -252,7 +252,7 @@ function App() {
             minLength={10}
             ref={DescriptionRef}
             //  value={data.description}
-            name='description'
+            //  name='description'
             // onChange={handleChange}
             placeholder='inserisci una tua descrizione personale'
           >
