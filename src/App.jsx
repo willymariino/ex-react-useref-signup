@@ -3,39 +3,52 @@ import { useState } from 'react'
 
 function App() {
 
-  const [name, setName] = useState("")
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [Specialization, setSpecialization] = useState("")
-  const [experienceYears, setExperienceYears] = useState(0)
-  const [description, setDescription] = useState("")
+  const [data, setData] = useState({
+    name: "",
+    username: "",
+    password: "",
+    Specialization: "",
+    experienceYears: 0,
+    description: ""
+
+  })
+
 
   // gestione input
   const handleChange = (e) => {
-    const value = e.target.value
-    setName(value)
-    setUsername(value)
-    setPassword(value)
-    setSpecialization(value)
-    setExperienceYears(value)
-    setDescription(value)
+
+    let value;
+
+    // Se il campo è di tipo numero, converte il valore da stringa a numero
+    if (e.target.type === "number") {
+      value = parseInt(value)
+    }
+
+    else {
+      value = e.target.value
+    }
+
+    // aggiorno il campo modificato
+    setData(data => ({
+
+      ...data,
+      [e.target.name]: value
+    }))
 
 
   }
 
-  // if (e.target.type === "number") {
-  //   value = parseInt(value)
-  // }
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(
-      "nome:", name,
-      "username:", username,
-      "password:", password,
-      "specializzazione:", Specialization,
-      "anni di esperienza:", experienceYears,
-      "descrizione personale", description
+      "nome:", data.name,
+      "username:", data.username,
+      "password:", data.password,
+      "specializzazione:", data.Specialization,
+      "anni di esperienza:", data.experienceYears,
+      "descrizione personale", data.description
     )
   }
 
@@ -47,24 +60,27 @@ function App() {
       <form onSubmit={handleSubmit}>
 
         <section>
-          <input type="text"
-            value={name}
+          <label htmlFor="name">nome utente</label>
+          <input type="text" id='name'
+            value={data.name}
             onChange={handleChange}
             placeholder='inserisci il tuo nome'
           />
         </section>
 
         <section>
-          <input type="text"
-            value={username}
+          <label htmlFor="userName">userName utente</label>
+          <input type="text" id='userName'
+            value={data.username}
             onChange={handleChange}
             placeholder='inserisci il tuo username'
           />
         </section>
 
         <section>
-          <input type="password"
-            value={password}
+          <label htmlFor="password"> password utente</label>
+          <input type="password" id='password'
+            value={data.password}
             onChange={handleChange}
             placeholder='inserisci la tua password'
           />
@@ -72,7 +88,8 @@ function App() {
 
 
         <section>
-          <select value={Specialization} onChange={handleChange}>
+          <label htmlFor="specialization">specializzazione utente </label>
+          <select value={data.Specialization} onChange={handleChange} id='specialization'>
             <option value=""> scegli la tua specializzazione</option>
             <option value="Full-Stack">Full-Stack</option>
             <option value="Front-end">Front-end</option>
@@ -80,14 +97,27 @@ function App() {
           </select>
         </section>
 
-        <input type="number"
-          value={experienceYears}
-          onChange={handleChange}
-          placeholder='inserisci la tua password'
-        />
+        <section>
+          <label htmlFor="experieYears">anni di esperienza</label>
+          <input type="number" id='experienceYears'
+            value={data.experienceYears}
+            onChange={handleChange}
+            placeholder='inserisci i tuoi anni di esperienza'
+          />
+        </section>
+
+        <section>
+          <label htmlFor="description">descrizione personale</label>
+          <input type="textarea" id='description'
+            value={data.description}
+            onChange={handleChange}
+            placeholder='inserisci una tua descrizione personale'
+          />
+
+        </section>
 
         <button type='submit'>
-
+          invia
         </button>
 
       </form>
