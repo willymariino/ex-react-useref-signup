@@ -29,12 +29,16 @@ function App() {
     }
 
     // aggiorno il campo modificato
-    setData(data => ({
+    setData(prev => ({  // qui wrappo la graffa con un tonda perché voglio che restituisca un oggetto, non che venga interpretato come il corpo della funzione.
 
-      ...data,
-      [e.target.name]: value
+      ...prev,  // copio lo stato precedente
+      [e.target.name]: value // aggiorno solo il campo modificato
     }))
-
+    /*
+    [e.target.name]: value significa:
+    Nell’oggetto, metti una chiave che si chiama come l’attributo name dell’input modificato, 
+    e assegna a quella chiave il valore scritto dall’utente."
+    */
 
   }
 
@@ -62,6 +66,7 @@ function App() {
         <section>
           <label htmlFor="name">nome utente</label>
           <input type="text" id='name'
+            minLength={3}
             value={data.name}
             name='name'  // name è necessario, altrimenti react non sa quale campo aggiornare, quindi se non c'è, i campi restano bloccati
             onChange={handleChange}
@@ -72,6 +77,7 @@ function App() {
         <section>
           <label htmlFor="userName">userName utente</label>
           <input type="text" id='userName'
+            minLength={3}
             value={data.username}
             name='username'
             onChange={handleChange}
@@ -82,6 +88,7 @@ function App() {
         <section>
           <label htmlFor="password"> password utente</label>
           <input type="password" id='password'
+            minLength={3}
             value={data.password}
             name='password'
             onChange={handleChange}
@@ -103,6 +110,8 @@ function App() {
         <section>
           <label htmlFor="experieYears">anni di esperienza</label>
           <input type="number" id='experienceYears'
+            min={1}
+            minLength={1}
             value={data.experienceYears}
             name='experienceYears'
             onChange={handleChange}
@@ -113,6 +122,7 @@ function App() {
         <section>
           <label htmlFor="description">descrizione personale</label>
           <textarea id='description'
+            minLength={10}
             value={data.description}
             name='description'
             onChange={handleChange}
