@@ -17,7 +17,7 @@ function App() {
   // gestione input
   const handleChange = (e) => {
 
-    let value;
+    let value = e.target.value
 
     // Se il campo è di tipo numero, converte il valore da stringa a numero
     if (e.target.type === "number") {
@@ -63,6 +63,7 @@ function App() {
           <label htmlFor="name">nome utente</label>
           <input type="text" id='name'
             value={data.name}
+            name='name'  // name è necessario, altrimenti react non sa quale campo aggiornare, quindi se non c'è, i campi restano bloccati
             onChange={handleChange}
             placeholder='inserisci il tuo nome'
           />
@@ -72,6 +73,7 @@ function App() {
           <label htmlFor="userName">userName utente</label>
           <input type="text" id='userName'
             value={data.username}
+            name='username'
             onChange={handleChange}
             placeholder='inserisci il tuo username'
           />
@@ -81,6 +83,7 @@ function App() {
           <label htmlFor="password"> password utente</label>
           <input type="password" id='password'
             value={data.password}
+            name='password'
             onChange={handleChange}
             placeholder='inserisci la tua password'
           />
@@ -89,7 +92,7 @@ function App() {
 
         <section>
           <label htmlFor="specialization">specializzazione utente </label>
-          <select value={data.Specialization} onChange={handleChange} id='specialization'>
+          <select value={data.Specialization} onChange={handleChange} id='specialization' name='Specialization'>
             <option value=""> scegli la tua specializzazione</option>
             <option value="Full-Stack">Full-Stack</option>
             <option value="Front-end">Front-end</option>
@@ -101,6 +104,7 @@ function App() {
           <label htmlFor="experieYears">anni di esperienza</label>
           <input type="number" id='experienceYears'
             value={data.experienceYears}
+            name='experienceYears'
             onChange={handleChange}
             placeholder='inserisci i tuoi anni di esperienza'
           />
@@ -108,11 +112,13 @@ function App() {
 
         <section>
           <label htmlFor="description">descrizione personale</label>
-          <input type="textarea" id='description'
+          <textarea id='description'
             value={data.description}
+            name='description'
             onChange={handleChange}
             placeholder='inserisci una tua descrizione personale'
-          />
+          >
+          </textarea>
 
         </section>
 
@@ -120,7 +126,7 @@ function App() {
           invia
         </button>
 
-      </form>
+      </form >
 
 
 
