@@ -115,7 +115,7 @@ function App() {
             onChange={handleChange}
             placeholder='inserisci il tuo nome'
           />
-          {error.name && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
+          {error.name && <span style={{ color: "red", fontSize: "0.9em" }}>{error.name}</span>}
         </section>
 
 
@@ -129,7 +129,7 @@ function App() {
             onChange={handleChange}
             placeholder='inserisci il tuo username'
           />
-          {error.username && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
+          {error.username && <span style={{ color: "red", fontSize: "0.9em" }}>{error.username}</span>}
         </section>
 
 
@@ -143,7 +143,7 @@ function App() {
             onChange={handleChange}
             placeholder='inserisci la tua password'
           />
-          {error.password && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
+          {error.password && <span style={{ color: "red", fontSize: "0.9em" }}>{error.password}</span>}
         </section>
 
 
@@ -156,7 +156,7 @@ function App() {
             <option value="Front-end">Front-end</option>
             <option value="Back-end">Back-end</option>
           </select>
-          {error.Specialization && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
+          {error.Specialization && <span style={{ color: "red", fontSize: "0.9em" }}>{error.Specialization}</span>}
         </section>
 
 
@@ -171,7 +171,7 @@ function App() {
             onChange={handleChange}
             placeholder='inserisci i tuoi anni di esperienza'
           />
-          {error.experienceYears && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
+          {error.experienceYears && <span style={{ color: "red", fontSize: "0.9em" }}>{error.experienceYears}</span>}
         </section>
 
 
@@ -185,7 +185,7 @@ function App() {
             onChange={handleChange}
             placeholder='inserisci una tua descrizione personale'
           >
-            {error.description && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
+            {error.description && <span style={{ color: "red", fontSize: "0.9em" }}>{error.description}</span>}
           </textarea>
 
         </section>
