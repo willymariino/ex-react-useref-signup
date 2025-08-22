@@ -19,10 +19,13 @@ function App() {
   // gestione input
   const handleChange = (e) => {
 
-    let value = e.target.value
+    // let value = e.target.value - versione senza destructuring
+
+    let { name, value, type } = e.target; // estraggo i valori con destrutturazione
+
 
     // Se il campo è di tipo numero, converte il valore da stringa a numero
-    if (e.target.type === "number") {
+    if (type === "number") { // non ho più bisogno di scrivere e.target.type, perchè l'ho già destrutturata
       value = parseInt(value)
     }
 
@@ -34,22 +37,37 @@ function App() {
     setData(prev => ({  // qui wrappo la graffa con un tonda perché voglio che restituisca un oggetto, non che venga interpretato come il corpo della funzione.
 
       ...prev,  // copio lo stato precedente
-      [e.target.name]: value // aggiorno solo il campo modificato
+      [name]: value // aggiorno solo il campo modificato
     }))
     /*
-    [e.target.name]: value significa:
+    [e.target.name]: value  o [name]: value se destrutturato, significa:
     Nell’oggetto, metti una chiave che si chiama come l’attributo name dell’input modificato, 
     e assegna a quella chiave il valore scritto dall’utente."
     */
 
     // validazione live
 
-    if (value.lenght < 3) {
-      setError("il nome deve avere almeno 3 caratteri")
-    }
-    else {
-      setError("")
-    }
+    setError(prev => {
+
+      let message = ""
+
+      if ((type === "text" || type === "textarea") && value.trim().length < 3) {
+        message = "almeno 3 caratteri richiesti"
+      }
+      else if (type === "number" && value <= 0) {
+        message = "inserisci un numero maggiore di 0"
+      }
+      else if (type === "select-one" && value === "") {
+        message = "seleziona una opzione"
+      }
+
+      return {
+        ...prev,
+        [name]: message
+      }
+
+    })
+
 
   }
 
@@ -93,13 +111,14 @@ function App() {
           <input type="text" id='name'
             minLength={3}
             value={data.name}
-            name='name'  // name è necessario, altrimenti react non sa quale campo aggiornare, quindi se non c'è, i campi restano bloccati
+            name='name'  //name è necessario, altrimenti react non sa quale campo aggiornare, quindi se non c'è, i campi restano bloccati
             onChange={handleChange}
             placeholder='inserisci il tuo nome'
           />
+          {error.name && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
         </section>
 
-        {error && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
+
 
         <section>
           <label htmlFor="userName">userName utente</label>
@@ -110,22 +129,24 @@ function App() {
             onChange={handleChange}
             placeholder='inserisci il tuo username'
           />
+          {error.username && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
         </section>
 
-        {error && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
+
 
         <section>
           <label htmlFor="password"> password utente</label>
           <input type="password" id='password'
-            minLength={3}
+            minLength={6}
             value={data.password}
             name='password'
             onChange={handleChange}
             placeholder='inserisci la tua password'
           />
+          {error.password && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
         </section>
 
-        {error && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
+
 
         <section>
           <label htmlFor="specialization">specializzazione utente </label>
@@ -135,9 +156,10 @@ function App() {
             <option value="Front-end">Front-end</option>
             <option value="Back-end">Back-end</option>
           </select>
+          {error.Specialization && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
         </section>
 
-        {error && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
+
 
         <section>
           <label htmlFor="experieYears">anni di esperienza</label>
@@ -149,9 +171,10 @@ function App() {
             onChange={handleChange}
             placeholder='inserisci i tuoi anni di esperienza'
           />
+          {error.experienceYears && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
         </section>
 
-        {error && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
+
 
         <section>
           <label htmlFor="description">descrizione personale</label>
@@ -162,11 +185,10 @@ function App() {
             onChange={handleChange}
             placeholder='inserisci una tua descrizione personale'
           >
+            {error.description && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
           </textarea>
 
         </section>
-
-        {error && <span style={{ color: "red", fontSize: "0.9em" }}>{error}</span>}
 
         <button type='submit'>
           invia
