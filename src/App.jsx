@@ -51,8 +51,11 @@ function App() {
 
       let message = ""
 
-      if ((type === "text" || type === "textarea" || type === "password") && value.trim().length < 3) {
+      if ((type === "text" || type === "textarea") && value.trim().length < 3) {
         message = "almeno 3 caratteri richiesti"
+      }
+      else if ((type === "password") && value.trim().length < 6) {
+        message = "almeno 6 caratteri richiesti"
       }
       else if (type === "number" && value <= 0) {
         message = "inserisci un numero maggiore di 0"
