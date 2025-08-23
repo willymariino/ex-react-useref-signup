@@ -146,7 +146,7 @@ function App() {
       !exp ||
       exp <= 0 ||
       !spec ||
-      descLength > 100 || descLength < 100
+      descLength < 100 || descLength > 1000
       // !data.Specialization ||
       // data.experienceYears <= 0 ||
       // !data.description.trim()
