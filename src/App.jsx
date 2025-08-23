@@ -137,6 +137,7 @@ function App() {
     const spec = SpecializationRef.current.value
     const exp = ExperienceRef.current.value
     const desc = DescriptionRef.current.value
+    const descLength = desc.trim().length
 
     if (
       !data.name.trim() ||
@@ -145,7 +146,7 @@ function App() {
       !exp ||
       exp <= 0 ||
       !spec ||
-      !desc.trim()
+      descLength > 100 || descLength < 100
       // !data.Specialization ||
       // data.experienceYears <= 0 ||
       // !data.description.trim()
@@ -249,7 +250,8 @@ function App() {
         <section>
           <label htmlFor="description">descrizione personale</label>
           <textarea id='description'
-            minLength={10}
+            minLength={100}
+            maxLength={1000}
             ref={DescriptionRef}
             //  value={data.description}
             //  name='description'
